@@ -2,7 +2,7 @@
 
 # CMPS 2200 Assignment 1
 
-**Name:**_________________________
+**Name:** Collette Riviere
 
 
 In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository. 
@@ -13,34 +13,28 @@ In this assignment, you will learn more about asymptotic notation, parallelism, 
 
   - 1a. Is $2^{n+1} \in O(2^n)$? Why or why not? 
 .  
-.  
-.  
-.  
+.   **Yes 2^(n+1) is in O(2^n) because for some constant c, 2^(n+1) is less than or equal to c*2^n (definition of asymptotic dominance).**
 . 
   - 1b. Is $2^{2^n} \in O(2^n)$? Why or why not?     
 .  
-.  
-.  
-.  
+.  **No  2^(2^n) is not in O(2^n) because if you take the log of both sides, 2^n log2 is always less than n log2. So O(2^n) cannot asymptotically dominate 2^(2^n), even for any constant of c*(2^n)**
 .  
   - 1c. Is $n^{1.01} \in O(\mathrm{log}^2 n)$?    
 .  
+.  **No it is not. Using the limit method, the limit of n^1.01 / log^2 n is infinity. This means n^1.01 is not in O(log^2 n).**
 .  
-.  
-.  
-
   - 1d. Is $n^{1.01} \in \Omega(\mathrm{log}^2 n)$?  
 .  
-.  
-.  
+.  **Yes, n^1.01 is in Omega(log^2 n). Using the limit method as in 1c, the limit of n^1.01 / log^2 n is infinity. This means n^1.01 is in Omega(log^2 n).**
 .  
   - 1e. Is $\sqrt{n} \in O((\mathrm{log} n)^3)$?  
 .  
-.  
+.  **No it is not. Using the limit method, the limit of sqrt(n) / (log n)^3 n is infinity. This means sqrt(n) is not in O((log n)^3).**
 .  
 .  
   - 1f. Is $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$?  
-.  
+
+.  **Yes it is. Using the limit method as in 1e, the limit of sqrt(n) / (log n)^3 is infinity. This means sqrt(n) is in Omega((log n)^3).**
 
 
 2. **SPARC to Python** (12 pts)
@@ -63,14 +57,8 @@ $$
   - 2b. (6 pts) What does this function do, in your own words?  
 
 .  
+.  **This function takes in a number, x, and returns the sum its two previous numbers (x-1 and x-2). To find x-1 and x-2, you must sum the previous of those numbers. Once you get to the base case of x = 1, you can sum the number up to your input number x.**
 .  
-.  
-.  
-.  
-.  
-.  
-.  
-  
 
 3. **Parallelism and recursion** (26 pts)
 
@@ -91,42 +79,19 @@ E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`
   - 3a. (7 pts) First, implement an iterative, sequential version of `longest_run` in `main.py`.  
 
   - 3b. (4 pts) What is the Work and Span of this implementation?  
-
 .  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-
+.  **If n is the length of the list, the work is the length of the list is 2n, and the Span is n.**
+.   
 
   - 3c. (7 pts) Next, implement a `longest_run_recursive`, a recursive, divide and conquer implementation. This is analogous to our implementation of `sum_list_recursive`. To do so, you will need to think about how to combine partial solutions from each recursive call. Make use of the provided class `Result`.   
 
-  - 3d. (4 pts) What is the Work and Span of this sequential algorithm?  
+  - 3d. (4 pts) What is the Work and Span of this recursive algorithm?  
 .  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
+.  **If n is the length of the list, the work is n^3, and the span is n.**
 .  
 
 
   - 3e. (4 pts) Assume that we parallelize in a similar way we did with `sum_list_recursive`. That is, each recursive call spawns a new thread. What is the Work and Span of this algorithm?  
 
 .  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-
+.  **The work of a parallelized longest_run_recursive is n^2 and the span is (n-k) so O(n), where n is the length of the list, and k is the number of matching keys in the list.**

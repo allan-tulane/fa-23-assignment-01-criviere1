@@ -6,10 +6,26 @@ See assignment-01.pdf for details.
 
 def foo(x):
     ### TODO
+    if (x <= 1):
+        return x
+    else:
+        return foo(x-1) + foo(x-2)
     pass
+
 
 def longest_run(mylist, key):
     ### TODO
+    j_max = 0
+    j = 0
+    for i in range(len(mylist)):
+        if (mylist[i] == key):
+            j += 1
+            #print(j)
+        else:
+            if (j > j_max):
+                j_max = j
+            j = 0
+    return j_max
     pass
 
 
@@ -28,7 +44,16 @@ class Result:
     
 def longest_run_recursive(mylist, key):
     ### TODO
-    pass
+    if not mylist: # making sure the list isn't empty
+        return 0
+    if mylist[0] == key:
+        count = 1
+        while count < len(mylist) and mylist[count] == key:
+            count += 1
+        return max(count, longest_run_recursive(mylist[count:], key))
+
+    return longest_run_recursive(mylist[1:], key)
+    
 
 ## Feel free to add your own tests here.
 def test_longest_run():
